@@ -1,45 +1,73 @@
 @extends('auth.layouts.layout')
 
 @section('content')
-    <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
-
-        <form action="{{ route('login') }}" method="post">
-            {{ csrf_field() }}
-            <div class="form-group has-feedback">
-                <input type="email" name="email" class="form-control" placeholder="Email">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+    <h3 class="box-title m-b-0">Sign In</h3>
+    <small>Enter your details below</small>
+    <form class="form-horizontal new-lg-form" id="loginform" method="post" action="{{ url('login') }}">
+        {{ csrf_field() }}
+        <div class="form-group  m-t-20">
+            <div class="col-xs-12">
+                <label>Email Address</label>
+                <input name="email" class="form-control" type="text" required="" placeholder="Email">
             </div>
-            <div class="form-group has-feedback">
-                <input type="password" name="password" class="form-control" placeholder="Password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
+                <label>Password</label>
+                <input class="form-control" type="password" name="password" required="" placeholder="Password">
             </div>
-            <div class="row">
-                <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-                            <input type="checkbox"> Remember Me
-                        </label>
-                    </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="checkbox checkbox-info pull-left p-t-0">
+                    <input id="checkbox-signup" type="checkbox" name="remember_token">
+                    <label for="checkbox-signup"> Remember me </label>
                 </div>
-                <!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-                </div>
-                <!-- /.col -->
+                <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i
+                            class="fa fa-lock m-r-5"></i> Forgot pwd?</a></div>
+        </div>
+        <div class="form-group text-center m-t-20">
+            <div class="col-xs-12">
+                <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light"
+                        type="submit">Log In
+                </button>
             </div>
-        </form>
-
-        {{--<div class="social-auth-links text-center">
-            <p>- OR -</p>
-            <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-                Facebook</a>
-            <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-                Google+</a>
+        </div>
+        {{--<div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
+                <div class="social"><a href="javascript:void(0)" class="btn  btn-facebook" data-toggle="tooltip"
+                                       title="Login with Facebook"> <i aria-hidden="true"
+                                                                       class="fa fa-facebook"></i> </a> <a
+                            href="javascript:void(0)" class="btn btn-googleplus" data-toggle="tooltip"
+                            title="Login with Google"> <i aria-hidden="true" class="fa fa-google-plus"></i> </a>
+                </div>
+            </div>
         </div>--}}
-        <!-- /.social-auth-links -->
-
-        <a href="#">I forgot my password</a><br>
-        <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
-    </div>
+        <div class="form-group m-b-0">
+            <div class="col-sm-12 text-center">
+                <p>Don't have an account? <a href="{{ route('register') }}" class="text-primary m-l-5"><b>Sign Up</b></a>
+                </p>
+            </div>
+        </div>
+    </form>
+    <form class="form-horizontal" id="recoverform" action="index.html">
+        <div class="form-group ">
+            <div class="col-xs-12">
+                <h3>Recover Password</h3>
+                <p class="text-muted">Enter your Email and instructions will be sent to you! </p>
+            </div>
+        </div>
+        <div class="form-group ">
+            <div class="col-xs-12">
+                <input class="form-control" type="text" required="" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group text-center m-t-20">
+            <div class="col-xs-12">
+                <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light"
+                        type="submit">Reset
+                </button>
+            </div>
+        </div>
+    </form>
 @endsection

@@ -1,51 +1,54 @@
 @extends('auth.layouts.layout')
 
 @section('content')
-    <div class="register-box-body">
-        <p class="login-box-msg">Register a new membership</p>
-
-        <form action="{{ route('register') }}" method="post">
-            {{ csrf_field() }}
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Full name" name="name">
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+    <h3 class="box-title m-b-0">Sign Up</h3> <small>Enter your details below</small>
+    <form class="form-horizontal new-lg-form" id="loginform" action="{{ url('register') }}" method="post">
+        {{ csrf_field() }}
+        <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+            <div class="col-xs-12">
+                <input class="form-control" type="text" name="name" placeholder="Name" value="{{ old('name') }}">
+                @if($errors->has('name'))
+                    <small class="help-block">{{ $errors->first('name') }}</small>
+                @endif
             </div>
-            <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Email" name="email">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        </div>
+        <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+            <div class="col-xs-12">
+                <input class="form-control" type="text" name="email" placeholder="Email" value="{{ old('email') }}">
+                @if($errors->has('email'))
+                    <small class="help-block">{{ $errors->first('email') }}</small>
+                @endif
             </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password" name="password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+            <div class="col-xs-12">
+                <input class="form-control" type="password" name="password" placeholder="Password">
+                @if($errors->has('password'))
+                    <small class="help-block">{{ $errors->first('password') }}</small>
+                @endif
             </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Retype password" name="password_confirmation">
-                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        </div>
+        <div class="form-group {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
+            <div class="col-xs-12">
+                <input class="form-control" type="password" name="password_confirmation" placeholder="Confirm Password">
+                @if($errors->has('password_confirmation'))
+                    <small class="help-block">{{ $errors->first('password_confirmation') }}</small>
+                @endif
             </div>
-            <div class="row">
-                <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-                            <input type="checkbox"> I agree to the <a href="#">terms</a>
-                        </label>
-                    </div>
-                </div>
-                <!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
-                </div>
-                <!-- /.col -->
+        </div>
+        <div class="form-group text-center m-t-20">
+            <div class="col-xs-12">
+                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">
+                    Sign Up
+                </button>
             </div>
-        </form>
-
-        {{--<div class="social-auth-links text-center">
-            <p>- OR -</p>
-            <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using
-                Facebook</a>
-            <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using
-                Google+</a>
-        </div>--}}
-
-        <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
-    </div>
+        </div>
+        <div class="form-group m-b-0">
+            <div class="col-sm-12 text-center">
+                <p>
+                    Already have an account? <a href="{{ route('login') }}" class="text-danger m-l-5"><b>Sign In</b></a>
+                </p>
+            </div>
+        </div>
+    </form>
 @endsection
