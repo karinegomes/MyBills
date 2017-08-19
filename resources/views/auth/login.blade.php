@@ -8,7 +8,7 @@
         <div class="form-group  m-t-20 {{ $errors->has('email') ? 'has-error' : '' }}">
             <div class="col-xs-12">
                 <label>Email Address</label>
-                <input name="email" class="form-control" type="text" placeholder="Email">
+                <input name="email" class="form-control" type="text" placeholder="Email" value="{{ old('email') }}">
                 @if($errors->has('email'))
                     <small class="help-block">{{ $errors->first('email') }}</small>
                 @endif
