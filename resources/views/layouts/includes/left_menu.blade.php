@@ -23,9 +23,6 @@
                     <li><a href="#" onclick="document.getElementById('logout-form').submit()"><i class="fa fa-power-off"></i> <span
                                     class="hide-menu">Logout</span></a></li>
                 </ul>
-                <form method="post" action="{{ route('logout') }}" id="logout-form">
-                    {{ csrf_field() }}
-                </form>
             </li>
             <li><a href="javascript:void(0)" class="waves-effect active"><i class="mdi mdi-av-timer fa-fw"
                                                                             data-icon="v"></i> <span
