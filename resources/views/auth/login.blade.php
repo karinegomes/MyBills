@@ -5,16 +5,22 @@
     <small>Enter your details below</small>
     <form class="form-horizontal new-lg-form" id="loginform" method="post" action="{{ url('login') }}">
         {{ csrf_field() }}
-        <div class="form-group  m-t-20">
+        <div class="form-group  m-t-20 {{ $errors->has('email') ? 'has-error' : '' }}">
             <div class="col-xs-12">
                 <label>Email Address</label>
-                <input name="email" class="form-control" type="text" required="" placeholder="Email">
+                <input name="email" class="form-control" type="text" placeholder="Email">
+                @if($errors->has('email'))
+                    <small class="help-block">{{ $errors->first('email') }}</small>
+                @endif
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
             <div class="col-xs-12">
                 <label>Password</label>
-                <input class="form-control" type="password" name="password" required="" placeholder="Password">
+                <input class="form-control" type="password" name="password" placeholder="Password">
+                @if($errors->has('password'))
+                    <small class="help-block">{{ $errors->first('password') }}</small>
+                @endif
             </div>
         </div>
         <div class="form-group">
