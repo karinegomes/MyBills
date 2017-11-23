@@ -81,10 +81,8 @@ $(document).ready(function () {
             url = window.location,
             element = $('ul.nav a').filter(function () {
                 return this.href === url || url.href.indexOf(this.href) === 0;
-            }).addClass('active').parent().parent().addClass('in').parent();
-        if (element.is('li')) {
-            element.addClass('active');
-        }
+            }).parent().parent().addClass('in').parent();
+
         $(window).ready(set);
         $(window).bind("resize", set);
     });
@@ -208,7 +206,7 @@ $(document).ready(function () {
         $("#recoverform").fadeIn();
     });
 
-    /* ================================================================= 
+    /* =================================================================
         Update 1.5
         this is for close icon when navigation open in mobile view
     ================================================================= */

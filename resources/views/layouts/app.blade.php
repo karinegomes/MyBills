@@ -10,25 +10,28 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
     <title>Ample Admin Template - The Ultimate Multipurpose admin template</title>
     <!-- Bootstrap Core CSS -->
-    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url('bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Menu CSS -->
-    <link href="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <link href="{{ url('plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css') }}" rel="stylesheet">
     <!-- toast CSS -->
-    <link href="../plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <link href="{{ url('plugins/bower_components/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
     <!-- morris CSS -->
-    <link href="../plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
+    <link href="{{ url('plugins/bower_components/morrisjs/morris.css') }}" rel="stylesheet">
     <!-- chartist CSS -->
-    <link href="../plugins/bower_components/chartist-js/dist/chartist.min.css" rel="stylesheet">
-    <link href="../plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css"
+    <link href="{{ url('plugins/bower_components/chartist-js/dist/chartist.min.css') }}" rel="stylesheet">
+    <link href="{{ url('plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css') }}"
           rel="stylesheet">
     <!-- Calendar CSS -->
-    <link href="../plugins/bower_components/calendar/dist/fullcalendar.css" rel="stylesheet"/>
+    <link href="{{ url('plugins/bower_components/calendar/dist/fullcalendar.css') }}" rel="stylesheet"/>
     <!-- animation CSS -->
-    <link href="css/animate.css" rel="stylesheet">
+    <link href="{{ url('css/animate.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/style.min.css" rel="stylesheet">
+    <link href="{{ url('css/style.min.css') }}" rel="stylesheet">
     <!-- color CSS -->
-    <link href="css/colors/megna-dark.css" id="theme" rel="stylesheet">
+    <link href="{{ url('css/colors/megna-dark.css') }}" id="theme" rel="stylesheet">
+
+    @stack('css')
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -291,6 +294,8 @@
                         <li role="separator" class="divider"></li>
                         <li><a href="javascript:void(0)"><i class="ti-settings"></i> Account Setting</a></li>
                         <li role="separator" class="divider"></li>
+                        <li><a href="{{ route('categories.index') }}">Categories</a></li>
+                        <li role="separator" class="divider"></li>
                         <li>
                             <a href="#" onclick="document.getElementById('logout-form').submit()">
                                 <i class="fa fa-power-off"></i> Logout
@@ -319,6 +324,13 @@
     <!-- ============================================================== -->
     <div id="page-wrapper">
         <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">{{ $pageName }}</h4></div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                    @yield('breadcrumbs')
+                </div>
+            </div>
             @yield('section')
         </div>
         <!-- /.container-fluid -->
@@ -334,31 +346,30 @@
 <!-- ============================================================== -->
 <!-- All Jquery -->
 <!-- ============================================================== -->
-<script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="{{ asset('plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap Core JavaScript -->
-<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- Menu Plugin JavaScript -->
-<script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+<script src="{{ asset('plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js') }}"></script>
 <!--slimscroll JavaScript -->
-<script src="js/jquery.slimscroll.js"></script>
+<script src="{{ asset('js/jquery.slimscroll.js') }}"></script>
 <!--Wave Effects -->
-<script src="js/waves.js"></script>
+<script src="{{ asset('js/waves.js') }}"></script>
 <!--Counter js -->
-<script src="../plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
-<script src="../plugins/bower_components/counterup/jquery.counterup.min.js"></script>
+<script src="{{ asset('plugins/bower_components/waypoints/lib/jquery.waypoints.js') }}"></script>
+<script src="{{ asset('plugins/bower_components/counterup/jquery.counterup.min.js') }}"></script>
 <!--Morris JavaScript -->
-<script src="../plugins/bower_components/raphael/raphael-min.js"></script>
-<script src="../plugins/bower_components/morrisjs/morris.js"></script>
+<script src="{{ asset('plugins/bower_components/raphael/raphael-min.js') }}"></script>
+<script src="{{ asset('plugins/bower_components/morrisjs/morris.js') }}"></script>
 <!-- chartist chart -->
-<script src="../plugins/bower_components/chartist-js/dist/chartist.min.js"></script>
-<script src="../plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+<script src="{{ asset('plugins/bower_components/chartist-js/dist/chartist.min.js') }}"></script>
+<script src="{{ asset('plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js') }}"></script>
 <!-- Calendar JavaScript -->
-<script src="../plugins/bower_components/moment/moment.js"></script>
-<script src='../plugins/bower_components/calendar/dist/fullcalendar.min.js'></script>
-<script src="../plugins/bower_components/calendar/dist/cal-init.js"></script>
+<script src="{{ asset('plugins/bower_components/moment/moment.js') }}"></script>
+<script src='{{ asset('plugins/bower_components/calendar/dist/fullcalendar.min.js') }}'></script>
+<script src="{{ asset('plugins/bower_components/calendar/dist/cal-init.js') }}"></script>
 <!-- Custom Theme JavaScript -->
-<script src="js/custom.min.js"></script>
-<script src="js/dashboard1.js"></script>
+<script src="{{ asset('js/custom.min.js') }}"></script>
 <!-- Custom tab JavaScript -->
 <script src="js/cbpFWTabs.js"></script>
 <script type="text/javascript">
@@ -368,9 +379,12 @@
         });
     })();
 </script>
-<script src="../plugins/bower_components/toast-master/js/jquery.toast.js"></script>
+<script src="{{ url('plugins/bower_components/toast-master/js/jquery.toast.js') }}"></script>
 <!--Style Switcher -->
-<script src="../plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+<script src="{{ url('plugins/bower_components/styleswitcher/jQuery.style.switcher.js') }}"></script>
+
+@stack('js')
+
 </body>
 
 </html>

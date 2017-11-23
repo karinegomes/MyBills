@@ -1467,12 +1467,6 @@ table.dataTable thead .sorting:after {
 .panel .panel-action {
     float: right
 }
-.panel .panel-action a {
-    opacity: .5
-}
-.panel .panel-action a:hover {
-    opacity: 1
-}
 .panel .panel-body {
     padding: 25px
 }
@@ -1684,15 +1678,10 @@ table.dataTable thead .sorting:after {
 .panel-white .panel-body {
     color: #313131
 }
-.panel-default .panel-action a,
-.panel-white .panel-action a {
-    color: #313131;
-    opacity: .5
-}
+
 .panel-default .panel-action a:hover,
 .panel-white .panel-action a:hover {
     opacity: 1;
-    color: #313131
 }
 .panel-default .panel-footer,
 .panel-white .panel-footer {

@@ -10,4 +10,10 @@ class ExpenseController extends Controller
     {
         return view('expenses.index');
     }
+
+    public function create()
+    {
+        //$expense = new Expense
+        return view('expenses.edit');
+    }
 }

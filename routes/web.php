@@ -14,7 +14,13 @@
 Route::middleware('auth')->group(function() {
     Route::get('/', 'DashboardController@index');
 
+    Route::resource('categories', 'CategoryController');
+
     Route::resource('expenses', 'ExpenseController');
+
+    Route::get('test', function () {
+        return response()->json('ndfjfj');
+    });
 });
 
 Auth::routes();
