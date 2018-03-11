@@ -8,7 +8,7 @@
 @endsection
 
 @section('section')
-    <div class="panel panel-default">
+    {{-- <div class="panel panel-default">
         <div class="panel-heading">
             ALL CATEGORIES
             <div class="panel-action">
@@ -44,7 +44,9 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div>--}}
+
+    <list-categories></list-categories>
 @endsection
 
 @push('css')

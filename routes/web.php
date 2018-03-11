@@ -14,13 +14,14 @@
 Route::middleware('auth')->group(function() {
     Route::get('/', 'DashboardController@index');
 
+    // Categories
     Route::resource('categories', 'CategoryController');
 
-    Route::resource('expenses', 'ExpenseController');
+    // Family members
+    Route::resource('family-members', 'FamilyMemberController', ['only' => 'index']);
 
-    Route::get('test', function () {
-        return response()->json('ndfjfj');
-    });
+    // Expenses
+    Route::resource('expenses', 'ExpenseController');
 });
 
 Auth::routes();

@@ -26,15 +26,11 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
-        try {
-            Category::create($request->all());
-        } catch (Exception $e) {
-            Log::debug($e);
+        Category::create($request->all());
 
-            // TODO
-        }
+        $categories = Category::all();
 
-        return redirect(route('categories.index'));
+        return compact('categories');
     }
 
     public function edit(Category $category)
@@ -44,14 +40,32 @@ class CategoryController extends Controller
 
     public function update(Category $category, CategoryRequest $request)
     {
+        $category->update($request->all());
+
+        $categories = Category::all();
+
+        return compact('categories');
+    }
+
+    public function destroy(Category $category)
+    {
         try {
-            $category->update($request->all());
-        } catch (Exception $e) {
+            $category->delete();
+        } catch (\Exception $e) {
             Log::debug($e);
 
-            // TODO
+            return;
         }
 
-        return redirect(route('categories.index'));
+        $categories = Category::all();
+
+        return response()->json(compact('categories'));
+    }
+
+    public function ajaxGetCategories()
+    {
+        $categories = Category::all();
+
+        return $categories;
     }
 }

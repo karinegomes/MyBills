@@ -7,7 +7,14 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+var Vue = require('vue');
+
+import VueSweetalert2 from 'vue-sweetalert2';
+
+window.Vue = Vue;
+
+Vue.use(require('vue-resource'));
+Vue.use(VueSweetalert2);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -17,6 +24,8 @@ window.Vue = require('vue');
 
 Vue.component('example', require('./components/Example.vue'));
 
+Vue.component('list-categories', require('./components/categories/List.vue'));
+
 const app = new Vue({
-    el: '#app'
+    el: '#my-bills-app'
 });

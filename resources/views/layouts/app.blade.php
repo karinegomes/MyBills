@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
     <title>Ample Admin Template - The Ultimate Multipurpose admin template</title>
     <!-- Bootstrap Core CSS -->
-    <link href="{{ url('bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url('bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet">
     <!-- Menu CSS -->
     <link href="{{ url('plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css') }}" rel="stylesheet">
     <!-- toast CSS -->
@@ -29,6 +30,10 @@
     <link href="{{ url('css/style.min.css') }}" rel="stylesheet">
     <!-- color CSS -->
     <link href="{{ url('css/colors/megna-dark.css') }}" id="theme" rel="stylesheet">
+
+    <style>
+
+    </style>
 
     @stack('css')
 
@@ -323,7 +328,7 @@
     <!-- Page Content -->
     <!-- ============================================================== -->
     <div id="page-wrapper">
-        <div class="container-fluid">
+        <div class="container-fluid" id="my-bills-app">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                     <h4 class="page-title">{{ $pageName }}</h4></div>
@@ -368,8 +373,6 @@
 <script src="{{ asset('plugins/bower_components/moment/moment.js') }}"></script>
 <script src='{{ asset('plugins/bower_components/calendar/dist/fullcalendar.min.js') }}'></script>
 <script src="{{ asset('plugins/bower_components/calendar/dist/cal-init.js') }}"></script>
-<!-- Custom Theme JavaScript -->
-<script src="{{ asset('js/custom.min.js') }}"></script>
 <!-- Custom tab JavaScript -->
 <script src="js/cbpFWTabs.js"></script>
 <script type="text/javascript">
@@ -382,6 +385,11 @@
 <script src="{{ url('plugins/bower_components/toast-master/js/jquery.toast.js') }}"></script>
 <!--Style Switcher -->
 <script src="{{ url('plugins/bower_components/styleswitcher/jQuery.style.switcher.js') }}"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="{{ asset('js/custom.min.js') }}"></script>
+
+<script src="{{ url('js/app.js') }}"></script>
 
 @stack('js')
 
