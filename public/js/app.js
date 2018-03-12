@@ -1106,9 +1106,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_sweetalert2__["a" /* default */]);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', __webpack_require__(48));
-
-Vue.component('list-categories', __webpack_require__(51));
+Vue.component('list-categories', __webpack_require__(48));
+Vue.component('list-family-members', __webpack_require__(51));
 
 var app = new Vue({
   el: '#my-bills-app'
@@ -47126,125 +47125,6 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Example.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b6ebd97a", Component.options)
-  } else {
-    hotAPI.reload("data-v-b6ebd97a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 49 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    }
-});
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-          _c("div", { staticClass: "panel panel-default" }, [
-            _c("div", { staticClass: "panel-heading" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "panel-body" }, [
-              _vm._v(
-                "\n                    I'm an example component!\n                "
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-b6ebd97a", module.exports)
-  }
-}
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(9)
-/* script */
-var __vue_script__ = __webpack_require__(52)
-/* template */
-var __vue_template__ = __webpack_require__(53)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
 Component.options.__file = "resources\\assets\\js\\components\\categories\\List.vue"
 
 /* hot reload */
@@ -47267,7 +47147,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 52 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -47454,7 +47334,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 53 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47665,6 +47545,452 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-6ee78177", module.exports)
+  }
+}
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(52)
+/* template */
+var __vue_template__ = __webpack_require__(53)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\family_members\\List.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-00772e15", Component.options)
+  } else {
+    hotAPI.reload("data-v-00772e15", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            familyMembers: [],
+            showAddLine: false,
+            familyMemberName: '',
+            editedFamilyMember: null,
+            errorCreate: '',
+            errors: {},
+            isStarting: true
+        };
+    },
+
+    methods: {
+        getFamilyMembers: function getFamilyMembers() {
+            this.$http.get('/api/family-members/list').then(function (response) {
+                this.isStarting = false;
+                this.familyMembers = response.body;
+            });
+        },
+        addFamilyMember: function addFamilyMember() {
+            var _this = this;
+
+            this.errorCreate = '';
+
+            if (!this.showAddLine) {
+                this.showAddLine = true;
+
+                this.$nextTick(function () {
+                    return _this.$refs.familyMemberName.focus();
+                });
+            } else {
+                this.showAddLine = false;
+            }
+        },
+        saveFamilyMember: function saveFamilyMember() {
+            this.errorCreate = '';
+
+            var data = {
+                name: this.familyMemberName
+            };
+
+            this.$http.post('/api/family-members', data).then(function (response) {
+                this.familyMembers = response.body.familyMembers;
+                this.showAddLine = false;
+                this.familyMemberName = '';
+            }).catch(function (response) {
+                var errors = response.body.errors;
+
+                this.errorCreate = errors.name[0];
+            });
+        },
+        editFamilyMember: function editFamilyMember(familyMember) {
+            this.showAddLine = false;
+            this.errors = {};
+
+            if (this.editedFamilyMember && this.editedFamilyMember.id === familyMember.id) {
+                this.editedFamilyMember = null;
+            } else {
+                this.editedFamilyMember = Object.assign({}, familyMember);
+            }
+        },
+        updateFamilyMember: function updateFamilyMember() {
+            this.errors = {};
+
+            var data = {
+                name: this.editedFamilyMember.name
+            };
+
+            this.$http.put('/api/family-members/' + this.editedFamilyMember.id, data).then(function (response) {
+                this.editedFamilyMember = null;
+                this.familyMembers = response.body.familyMembers;
+            }).catch(function (response) {
+                this.$set(this.errors, this.editedFamilyMember.id, response.body.errors.name[0]);
+            });
+        },
+        checkError: function checkError(familyMember) {
+            return this.errors[familyMember.id] !== undefined;
+        },
+        deleteFamilyMember: function deleteFamilyMember(familyMember) {
+            var _this2 = this;
+
+            this.$swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes',
+                showLoaderOnConfirm: true,
+                preConfirm: null
+            }).then(function (result) {
+                if (result.value) {
+                    _this2.$http.delete('/api/family-members/' + familyMember.id).then(function (response) {
+                        this.familyMembers = response.body.familyMembers;
+                    });
+                }
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.getFamilyMembers();
+    },
+
+    directives: {
+        focus: {
+            inserted: function inserted(el) {
+                el.focus();
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "panel panel-default" }, [
+    _c("div", { staticClass: "panel-heading" }, [
+      _vm._v("\n        ALL FAMILY MEMBERS\n        "),
+      _c("div", { staticClass: "panel-action" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "button" },
+            on: { click: _vm.addFamilyMember }
+          },
+          [_vm._v("ADD FAMILY MEMBER")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _c("div", { staticClass: "table-responsive" }, [
+        _c("table", { staticClass: "table table-hover" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            [
+              !_vm.isStarting &&
+              _vm.familyMembers.length == 0 &&
+              !_vm.showAddLine
+                ? _c("tr", [
+                    _c(
+                      "td",
+                      { staticClass: "text-center", attrs: { colspan: "2" } },
+                      [_vm._v("No family members found.")]
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.showAddLine
+                ? _c("tr", [
+                    _c("td", { class: { "has-error": _vm.errorCreate } }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.familyMemberName,
+                            expression: "familyMemberName"
+                          }
+                        ],
+                        ref: "familyMemberName",
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.familyMemberName },
+                        on: {
+                          keyup: function($event) {
+                            if (
+                              !("button" in $event) &&
+                              _vm._k($event.keyCode, "enter", 13, $event.key)
+                            ) {
+                              return null
+                            }
+                            _vm.saveFamilyMember($event)
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.familyMemberName = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errorCreate
+                        ? _c("small", { staticClass: "help-block" }, [
+                            _vm._v(_vm._s(_vm.errorCreate))
+                          ])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("td")
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.familyMembers, function(familyMember) {
+                return _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      class: { "has-error": _vm.checkError(familyMember) },
+                      on: {
+                        click: function($event) {
+                          _vm.editFamilyMember(familyMember)
+                        }
+                      }
+                    },
+                    [
+                      !_vm.editedFamilyMember ||
+                      _vm.editedFamilyMember.id !== familyMember.id
+                        ? _c("span", [_vm._v(_vm._s(familyMember.name))])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.editedFamilyMember &&
+                      _vm.editedFamilyMember.id === familyMember.id
+                        ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.editedFamilyMember.name,
+                                expression: "editedFamilyMember.name"
+                              },
+                              { name: "focus", rawName: "v-focus" }
+                            ],
+                            ref: "familyMembers",
+                            refInFor: true,
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              title: "Family member name"
+                            },
+                            domProps: { value: _vm.editedFamilyMember.name },
+                            on: {
+                              keyup: function($event) {
+                                if (
+                                  !("button" in $event) &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "enter",
+                                    13,
+                                    $event.key
+                                  )
+                                ) {
+                                  return null
+                                }
+                                _vm.updateFamilyMember($event)
+                              },
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.editedFamilyMember,
+                                  "name",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.checkError(familyMember)
+                        ? _c("small", { staticClass: "help-block" }, [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(_vm.errors[_vm.editedFamilyMember.id]) +
+                                "\n                        "
+                            )
+                          ])
+                        : _vm._e()
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "btn btn-info btn-outline btn-circle btn-lg m-r-5",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            _vm.deleteFamilyMember(familyMember)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "ti-trash" })]
+                    )
+                  ])
+                ])
+              })
+            ],
+            2
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("NAME")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center", attrs: { width: "1%" } }, [
+          _vm._v("MANAGE")
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-00772e15", module.exports)
   }
 }
 

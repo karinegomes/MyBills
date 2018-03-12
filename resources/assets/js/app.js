@@ -22,9 +22,8 @@ Vue.use(VueSweetalert2);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
-
 Vue.component('list-categories', require('./components/categories/List.vue'));
+Vue.component('list-family-members', require('./components/family_members/List.vue'));
 
 const app = new Vue({
     el: '#my-bills-app'

@@ -22,3 +22,6 @@ Route::get('categories/list', 'CategoryController@ajaxGetCategories');
 Route::post('categories', 'CategoryController@store');
 Route::put('categories/{category}', 'CategoryController@update');
 Route::delete('categories/{category}', 'CategoryController@destroy');
+
+Route::get('family-members/list', 'FamilyMemberController@ajaxGetAll');
+Route::resource('family-members', 'FamilyMemberController')->only(['store', 'update', 'destroy']);

@@ -37,6 +37,13 @@
                 </a>
             </li>
 
+            <li>
+                <a href="{{ route('family-members.index') }}"
+                   class="waves-effect {{ $pageName == 'Family members' ? 'active' : '' }}">
+                    <i class="mdi mdi-account-multiple fa-fw"></i> <span class="hide-menu">Family members</span>
+                </a>
+            </li>
+
             <li><a href="javascript:void(0)" class="waves-effect "><i class="mdi mdi-content-copy fa-fw"></i> <span
                             class="hide-menu">Pages<span class="fa arrow"></span><span
                                 class="label label-rouded label-warning pull-right">30</span></span></a>
