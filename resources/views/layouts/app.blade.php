@@ -28,6 +28,7 @@
     <link href="{{ url('css/animate.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ url('css/style.min.css') }}" rel="stylesheet">
+    <link href="{{ url('css/custom.min.css') }}" rel="stylesheet">
     <!-- color CSS -->
     <link href="{{ url('css/colors/megna-dark.css') }}" id="theme" rel="stylesheet">
 

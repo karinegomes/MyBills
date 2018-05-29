@@ -44,6 +44,13 @@
                 </a>
             </li>
 
+            <li>
+                <a href="{{ route('periods.index') }}"
+                   class="waves-effect {{ $pageName == 'Periods' ? 'active' : '' }}">
+                    <i class="mdi mdi-calendar fa-fw"></i> <span class="hide-menu">Periods</span>
+                </a>
+            </li>
+
             <li><a href="javascript:void(0)" class="waves-effect "><i class="mdi mdi-content-copy fa-fw"></i> <span
                             class="hide-menu">Pages<span class="fa arrow"></span><span
                                 class="label label-rouded label-warning pull-right">30</span></span></a>

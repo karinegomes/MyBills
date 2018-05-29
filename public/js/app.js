@@ -70,7 +70,7 @@
 "use strict";
 
 
-var bind = __webpack_require__(3);
+var bind = __webpack_require__(4);
 var isBuffer = __webpack_require__(19);
 
 /*global toString:true*/
@@ -424,10 +424,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(5);
+    adapter = __webpack_require__(6);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(5);
+    adapter = __webpack_require__(6);
   }
   return adapter;
 }
@@ -498,10 +498,119 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -519,7 +628,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -709,7 +818,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -720,7 +829,7 @@ var settle = __webpack_require__(22);
 var buildURL = __webpack_require__(24);
 var parseHeaders = __webpack_require__(25);
 var isURLSameOrigin = __webpack_require__(26);
-var createError = __webpack_require__(6);
+var createError = __webpack_require__(7);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(27);
 
 module.exports = function xhrAdapter(config) {
@@ -896,7 +1005,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -921,7 +1030,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -933,7 +1042,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -959,120 +1068,11 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(11);
-module.exports = __webpack_require__(54);
+module.exports = __webpack_require__(57);
 
 
 /***/ }),
@@ -1106,8 +1106,11 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_sweetalert2__["a" /* default */]);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+/*Vue.component('modal', require('./components/Modal.vue'));*/
+
 Vue.component('list-categories', __webpack_require__(48));
 Vue.component('list-family-members', __webpack_require__(51));
+Vue.component('list-periods', __webpack_require__(54));
 
 var app = new Vue({
   el: '#my-bills-app'
@@ -31072,7 +31075,7 @@ module.exports = __webpack_require__(18);
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(3);
+var bind = __webpack_require__(4);
 var Axios = __webpack_require__(20);
 var defaults = __webpack_require__(2);
 
@@ -31107,9 +31110,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(8);
+axios.Cancel = __webpack_require__(9);
 axios.CancelToken = __webpack_require__(34);
-axios.isCancel = __webpack_require__(7);
+axios.isCancel = __webpack_require__(8);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -31269,7 +31272,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(6);
+var createError = __webpack_require__(7);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -31688,7 +31691,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(31);
-var isCancel = __webpack_require__(7);
+var isCancel = __webpack_require__(8);
 var defaults = __webpack_require__(2);
 
 /**
@@ -31841,7 +31844,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(8);
+var Cancel = __webpack_require__(9);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -43007,7 +43010,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(5)))
 
 /***/ }),
 /* 39 */
@@ -47104,7 +47107,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(9)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = __webpack_require__(49)
 /* template */
@@ -47553,7 +47556,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(9)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 var __vue_script__ = __webpack_require__(52)
 /* template */
@@ -47996,6 +47999,707 @@ if (false) {
 
 /***/ }),
 /* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(55)
+/* template */
+var __vue_template__ = __webpack_require__(56)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\periods\\List.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2fc3c342", Component.options)
+  } else {
+    hotAPI.reload("data-v-2fc3c342", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            showModal: false,
+            showAddLine: false,
+            isStarting: true,
+            periods: [],
+            editedPeriod: null,
+            errors: {
+                periodId: null,
+                messages: null
+            },
+            months: [{ 'id': 1, 'name': 'January' }, { 'id': 2, 'name': 'February' }, { 'id': 3, 'name': 'March' }, { 'id': 4, 'name': 'April' }, { 'id': 5, 'name': 'May' }, { 'id': 6, 'name': 'June' }, { 'id': 7, 'name': 'July' }, { 'id': 8, 'name': 'August' }, { 'id': 9, 'name': 'September' }, { 'id': 10, 'name': 'October' }, { 'id': 11, 'name': 'November' }, { 'id': 12, 'name': 'December' }],
+            period: {
+                month: this.getCurrentMonth(),
+                year: this.getCurrentYear()
+            },
+            createErrors: {}
+        };
+    },
+
+    methods: {
+        addPeriod: function addPeriod() {
+            this.showAddLine = !this.showAddLine;
+            this.createErrors = {};
+            this.editedPeriod = null;
+        },
+        getPeriods: function getPeriods() {
+            this.$http.get('/api/periods/list').then(function (response) {
+                this.isStarting = false;
+                this.periods = response.body;
+            });
+        },
+        checkError: function checkError(period) {
+            var field = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+            var hasError = this.errors.periodId === period.id;
+
+            if (field === '') {
+                return hasError;
+            }
+
+            if (hasError && this.errors.messages[field] !== undefined) {
+                return true;
+            }
+        },
+        checkErrorCreate: function checkErrorCreate(field) {
+            return this.createErrors[field] !== undefined;
+        },
+        savePeriod: function savePeriod() {
+            this.$nextTick(function () {
+                console.log(this.period.month);
+                console.log(this.period.year);
+            });
+
+            this.$http.post('/api/periods', this.period).then(function (response) {
+                this.periods = response.body.periods;
+                this.showAddLine = false;
+                this.createErrors = {};
+            }).catch(function (response) {
+                var errors = response.body.errors;
+
+                console.log(errors);
+
+                this.createErrors = errors;
+            });
+        },
+        editPeriod: function editPeriod(period) {
+            this.showAddLine = false;
+            this.editedPeriod = period;
+        },
+        updatePeriod: function updatePeriod(period) {
+            console.log(period);
+
+            this.$http.put('/api/periods/' + period.id, period).then(function (response) {
+                this.periods = response.body.periods;
+                this.editedPeriod = null;
+
+                this.errors = {
+                    periodId: null,
+                    messages: null
+                };
+            }).catch(function (response) {
+                var errors = response.body.errors;
+
+                console.log(errors);
+
+                this.errors = {
+                    periodId: period.id,
+                    messages: errors
+                };
+
+                console.log(this.errors);
+
+                //this.createErrors = errors;
+            });
+        },
+        deletePeriod: function deletePeriod() {},
+        isCurrentMonth: function isCurrentMonth(month) {
+            return month === this.period.month;
+        },
+        getCurrentMonth: function getCurrentMonth() {
+            return parseInt(moment().format('M'));
+        },
+        getCurrentYear: function getCurrentYear() {
+            return parseInt(moment().format('YYYY'));
+        },
+        getMonthName: function getMonthName(month) {
+            var _month = this.months.find(function (item) {
+                return item.id === month;
+            });
+
+            return _month.name;
+        },
+        isEditing: function isEditing(period) {
+            return this.editedPeriod && this.editedPeriod.id === period.id;
+        },
+        cancelEditing: function cancelEditing() {
+            this.editedPeriod = null;
+        }
+    },
+    mounted: function mounted() {
+        this.getPeriods();
+    },
+
+    directives: {
+        focus: {
+            inserted: function inserted(el) {
+                el.focus();
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "panel panel-default" }, [
+    _c("div", { staticClass: "panel-heading" }, [
+      _vm._v("\n        ALL PERIODS\n        "),
+      _c("div", { staticClass: "panel-action" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "button" },
+            on: { click: _vm.addPeriod }
+          },
+          [_vm._v("ADD PERIOD")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _c("div", { staticClass: "table-responsive" }, [
+        _c("table", { staticClass: "table table-hover" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            [
+              !_vm.isStarting && _vm.periods.length == 0 && !_vm.showAddLine
+                ? _c("tr", [
+                    _c(
+                      "td",
+                      { staticClass: "text-center", attrs: { colspan: "3" } },
+                      [_vm._v("No periods found.")]
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.showAddLine
+                ? _c("tr", [
+                    _c(
+                      "td",
+                      { class: { "has-error": _vm.checkErrorCreate("month") } },
+                      [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.period.month,
+                                expression: "period.month"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { name: "month" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.period,
+                                  "month",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option"),
+                            _vm._v(" "),
+                            _vm._l(_vm.months, function(month) {
+                              return _c(
+                                "option",
+                                {
+                                  domProps: {
+                                    value: month.id,
+                                    selected: _vm.isCurrentMonth(month.id)
+                                  }
+                                },
+                                [_vm._v(_vm._s(month.name))]
+                              )
+                            })
+                          ],
+                          2
+                        ),
+                        _vm._v(" "),
+                        _vm.checkErrorCreate("month")
+                          ? _c("small", { staticClass: "help-block" }, [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(_vm.createErrors.month[0]) +
+                                  "\n                        "
+                              )
+                            ])
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { class: { "has-error": _vm.checkErrorCreate("year") } },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.period.year,
+                              expression: "period.year"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { name: "year" },
+                          domProps: { value: _vm.period.year },
+                          on: {
+                            keyup: function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k($event.keyCode, "enter", 13, $event.key)
+                              ) {
+                                return null
+                              }
+                              _vm.savePeriod($event)
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.period, "year", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.checkErrorCreate("year")
+                          ? _c("small", { staticClass: "help-block" }, [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(_vm.createErrors.year[0]) +
+                                  "\n                        "
+                              )
+                            ])
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: { type: "button" },
+                          on: { click: _vm.savePeriod }
+                        },
+                        [_vm._v("Save")]
+                      )
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.periods, function(period) {
+                return _c("tr", [
+                  _c(
+                    "td",
+                    {
+                      class: { "has-error": _vm.checkError(period, "month") },
+                      on: {
+                        click: function($event) {
+                          _vm.editPeriod(period)
+                        }
+                      }
+                    },
+                    [
+                      !_vm.editedPeriod || _vm.editedPeriod.id !== period.id
+                        ? _c("span", [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(_vm.getMonthName(period.month)) +
+                                "\n                        "
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.editedPeriod && _vm.editedPeriod.id === period.id
+                        ? _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: period.month,
+                                  expression: "period.month"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { name: "month" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    period,
+                                    "month",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option"),
+                              _vm._v(" "),
+                              _vm._l(_vm.months, function(month) {
+                                return _c(
+                                  "option",
+                                  {
+                                    domProps: {
+                                      value: month.id,
+                                      selected: month.id === period.month
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(month.name))]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.checkError(period, "month")
+                        ? _c("small", { staticClass: "help-block" }, [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(_vm.errors.messages.month[0]) +
+                                "\n                        "
+                            )
+                          ])
+                        : _vm._e()
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      class: { "has-error": _vm.checkError(period, "year") },
+                      on: {
+                        click: function($event) {
+                          _vm.editPeriod(period)
+                        }
+                      }
+                    },
+                    [
+                      !_vm.editedPeriod || _vm.editedPeriod.id !== period.id
+                        ? _c("span", [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(period.year) +
+                                "\n                        "
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.editedPeriod && _vm.editedPeriod.id === period.id
+                        ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: period.year,
+                                expression: "period.year"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { name: "year" },
+                            domProps: { value: period.year },
+                            on: {
+                              keyup: function($event) {
+                                if (
+                                  !("button" in $event) &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "enter",
+                                    13,
+                                    $event.key
+                                  )
+                                ) {
+                                  return null
+                                }
+                                _vm.updatePeriod(period)
+                              },
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(period, "year", $event.target.value)
+                              }
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.checkError(period, "year")
+                        ? _c("small", { staticClass: "help-block" }, [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(_vm.errors.messages.year[0]) +
+                                "\n                        "
+                            )
+                          ])
+                        : _vm._e()
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("td", [
+                    !_vm.editedPeriod || _vm.editedPeriod.id !== period.id
+                      ? _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-info btn-outline btn-circle btn-lg m-r-5",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                _vm.deletePeriod(period)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "ti-trash" })]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditing(period)
+                      ? _c("div", { staticClass: "nowrap" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.updatePeriod(period)
+                                }
+                              }
+                            },
+                            [_vm._v("Save")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-warning",
+                              attrs: { type: "button" },
+                              on: { click: _vm.cancelEditing }
+                            },
+                            [_vm._v("Cancel")]
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ])
+              })
+            ],
+            2
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("MONTH")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("YEAR")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center", attrs: { width: "1%" } }, [
+          _vm._v("MANAGE")
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2fc3c342", module.exports)
+  }
+}
+
+/***/ }),
+/* 57 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

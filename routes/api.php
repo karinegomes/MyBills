@@ -25,3 +25,6 @@ Route::delete('categories/{category}', 'CategoryController@destroy');
 
 Route::get('family-members/list', 'FamilyMemberController@ajaxGetAll');
 Route::resource('family-members', 'FamilyMemberController')->only(['store', 'update', 'destroy']);
+
+Route::get('periods/list', 'PeriodController@ajaxGetAll');
+Route::resource('periods', 'PeriodController')->only(['store', 'update']);

@@ -22,6 +22,9 @@ Route::middleware('auth')->group(function() {
 
     // Expenses
     Route::resource('expenses', 'ExpenseController');
+
+    // Periods
+    Route::resource('periods', 'PeriodController')->only('index');
 });
 
 Auth::routes();
